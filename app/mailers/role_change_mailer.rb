@@ -49,6 +49,11 @@ class RoleChangeMailer < ApplicationMailer
           email: role.user.senior_delegates.map(&:email),
           message: 'Informing as one of the Delegates under you has been put in probation.',
         ),
+        UserRole::UserRoleEmailRecipient.new(
+          name: 'WIC',
+          email: UserGroup.teams_committees_group_wic.metadata.email,
+          message: 'Informing as there was a change in probations details of a Delegate.',
+        ),
       )
     when UserGroup.group_types[:delegate_regions]
       @to_list.push(
@@ -61,6 +66,11 @@ class RoleChangeMailer < ApplicationMailer
           name: UserGroup.teams_committees_group_weat.name,
           email: UserGroup.teams_committees_group_weat.metadata.email,
           message: 'Please add this to monthly digest and if necessary create a GSuite account.',
+        ),
+        UserRole::UserRoleEmailRecipient.new(
+          name: 'WIC',
+          email: UserGroup.teams_committees_group_wic.metadata.email,
+          message: 'Informing to verify Conflict of Interest declaration.',
         ),
       )
     when UserGroup.group_types[:translators]
@@ -88,6 +98,11 @@ class RoleChangeMailer < ApplicationMailer
           email: role.group.lead_user.email,
           message: 'Informing as there is a new appointment in your Team/Committee/Council.',
         ),
+        UserRole::UserRoleEmailRecipient.new(
+          name: 'WIC',
+          email: UserGroup.teams_committees_group_wic.metadata.email,
+          message: 'Informing to verify Conflict of Interest declaration.',
+        ),
       )
     when UserGroup.group_types[:board], UserGroup.group_types[:officers]
       @to_list.push(
@@ -100,6 +115,11 @@ class RoleChangeMailer < ApplicationMailer
           name: UserGroup.teams_committees_group_weat.name,
           email: UserGroup.teams_committees_group_weat.metadata.email,
           message: 'Please add this to monthly digest.',
+        ),
+        UserRole::UserRoleEmailRecipient.new(
+          name: 'WIC',
+          email: UserGroup.teams_committees_group_wic.metadata.email,
+          message: 'Informing to verify Conflict of Interest declaration.',
         ),
       )
     when UserGroup.group_types[:banned_competitors]
@@ -144,6 +164,11 @@ class RoleChangeMailer < ApplicationMailer
           name: 'Senior Delegates',
           email: role.user.senior_delegates.map(&:email),
           message: 'Informing as there was a change in the probation status for one of the Delegates under you.',
+        ),
+        UserRole::UserRoleEmailRecipient.new(
+          name: 'WIC',
+          email: UserGroup.teams_committees_group_wic.metadata.email,
+          message: 'Informing as there was a change in probations details of a Delegate.',
         ),
       )
     when UserGroup.group_types[:delegate_regions]
